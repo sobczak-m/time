@@ -308,6 +308,8 @@ func (lim *Limiter) SetBurstAt(now time.Time, newBurst int) {
 // maxFutureReserve specifies the maximum reservation wait duration allowed.
 // reserveN returns Reservation, not *Reservation, to avoid allocation in AllowN and WaitN.
 func (lim *Limiter) reserveN(now time.Time, n int, maxFutureReserve time.Duration) Reservation {
+	fmt.Println("DEBUG --------------------------------------")
+
 	lim.mu.Lock()
 
 	if lim.limit == Inf {
@@ -321,6 +323,13 @@ func (lim *Limiter) reserveN(now time.Time, n int, maxFutureReserve time.Duratio
 	}
 
 	now, last, tokens := lim.advance(now)
+
+	fmt.Println("NOW:")
+	fmt.Println(now)
+	fmt.Println("LAST:")
+	fmt.Println(last)
+	fmt.Println("TOKENS:")
+	fmt.Println(tokens)
 
 	// Calculate the remaining number of tokens resulting from the request.
 	tokens -= float64(n)
