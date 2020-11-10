@@ -419,6 +419,6 @@ func (limit Limit) tokensFromDuration(d time.Duration) float64 {
 	nsec := float64(d%time.Second) * float64(limit)
 	fmt.Printf("Sec: %f\n", sec)
 	fmt.Printf("NSec: %f\n", nsec)
-	fmt.Printf("Return: %f\n", sec+nsec/1e9)
-	return sec + nsec/1e9
+	fmt.Printf("Return: %f\n", sec+nsec/(1e9*10))
+	return sec + nsec/(1e9*10)
 }
