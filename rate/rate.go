@@ -396,7 +396,13 @@ func (lim *Limiter) advance(now time.Time) (newNow time.Time, newLast time.Time,
 // durationFromTokens is a unit conversion function from the number of tokens to the duration
 // of time it takes to accumulate them at a rate of limit tokens per second.
 func (limit Limit) durationFromTokens(tokens float64) time.Duration {
+	fmt.Println("Duration from tokens -----------------")
+	fmt.Printf("Tokens: %f\n", tokens)
+	fmt.Printf("Limit: %f\n", float64(limit))
 	seconds := tokens / float64(limit)
+	fmt.Println(time.Nanosecond)
+	fmt.Println(time.Duration(1e9 * seconds))
+	fmt.Println(time.Nanosecond * time.Duration(1e9*seconds))
 	return time.Nanosecond * time.Duration(1e9*seconds)
 }
 
@@ -405,7 +411,11 @@ func (limit Limit) durationFromTokens(tokens float64) time.Duration {
 func (limit Limit) tokensFromDuration(d time.Duration) float64 {
 	// Split the integer and fractional parts ourself to minimize rounding errors.
 	// See golang.org/issues/34861.
+	fmt.Println("tokensFromDuration -----------------")
 	sec := float64(d/time.Second) * float64(limit)
 	nsec := float64(d%time.Second) * float64(limit)
+	fmt.Printf("Sec: %f\n", sec)
+	fmt.Printf("NSec: %f\n", nsec)
+	fmt.Printf("Return: %f\n", sec+nsec/1e9)
 	return sec + nsec/1e9
 }
