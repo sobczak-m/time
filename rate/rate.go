@@ -399,7 +399,7 @@ func (limit Limit) durationFromTokens(tokens float64) time.Duration {
 	fmt.Println("Duration from tokens ------------------")
 	fmt.Printf("Tokens: %f\n", tokens)
 	fmt.Printf("Limit: %f\n", float64(limit))
-	seconds := tokens / float64(limit)
+	seconds := tokens / float64(limit) * 10
 	fmt.Println(time.Nanosecond)
 	fmt.Println(time.Duration(1e9 * seconds))
 	fmt.Println(time.Nanosecond * time.Duration(1e9*seconds))
